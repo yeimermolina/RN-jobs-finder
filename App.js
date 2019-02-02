@@ -25,6 +25,10 @@ const MainNavigator = createBottomTabNavigator({
       }
     })
   }
+}, {
+  navigationOptions: {
+    tabBarVisible: false
+  }
 });
 
 const AppNavigator = createAppContainer(MainNavigator)

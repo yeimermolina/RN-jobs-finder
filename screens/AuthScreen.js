@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import {
   facebookLogin
@@ -8,6 +8,18 @@ import {
 class AuthScreen extends Component {
   componentDidMount() {
     this.props.facebookLogin();
+    this.onAuthComplete(this.props)
+    // AsyncStorage.removeItem('fb_token');
+  }
+
+  onAuthComplete(props) {
+    if (props.token) {
+      this.props.navigation.navigate('map');
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.onAuthComplete(nextProps);
   }
 
   render() {
@@ -19,4 +31,8 @@ class AuthScreen extends Component {
   }
 }
 
-export default connect(null, { facebookLogin })(AuthScreen);
+const mapStateToProps = ({ auth }) => {
+  return { token: auth.token }
+}
+
+export default connect(mapStateToProps, { facebookLogin })(AuthScreen);
