@@ -23,7 +23,10 @@ const MainNavigator = createBottomTabNavigator({
           settings: { screen: SettingsScreen }
         }) 
       }
-    })
+    }),
+    navigationOptions: {
+      tabBarVisible: false
+    }
   }
 }, {
   navigationOptions: {
