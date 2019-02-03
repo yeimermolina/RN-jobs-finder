@@ -32,8 +32,8 @@ class ReviewScreen extends Component {
         longitudeDelta: 0.02 
       }
       return (
-        <Card>
-          <View style={{ height: 300 }}>
+        <Card title={job.jobtitle} key={job.jobkey}>
+          <View style={{ height: 200 }}>
             <MapView 
               style={{ flex: 1 }}
               scrollEnabled={false}
@@ -68,6 +68,7 @@ const styles = {
   detailWrapper: {
     flexDirection: 'row',
     marginBottom: 10,
+    marginTop: 10,
     justifyContent: 'space-around'
   },
   italics: {
