@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text, Platform, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { Card } from 'react-native-elements';
 
 class ReviewScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -21,14 +22,37 @@ class ReviewScreen extends Component {
     }
   });
 
-
+  renderLikedJobs() {
+    console.log('LIKED', this.props.likedJobs)
+    return this.props.likedJobs.map((job) => (
+      <Card>
+        <View style={{ height: 300 }}>
+          <View style={styles.detailWrapper}>
+            <Text style={styles.italics}>{job.company}</Text>
+            <Text style={styles.italics}>{job.formattedRelativeTime}</Text>
+          </View>
+        </View>
+      </Card>
+    ));
+  }
 
   render() {
     return (
-      <View>
-        <Text>Review Screen</Text>
-      </View>
+      <ScrollView>
+        {this.renderLikedJobs()}
+      </ScrollView>
     );
+  }
+}
+
+const styles = {
+  detailWrapper: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    justifyContent: 'space-around'
+  },
+  italics: {
+    fontStyle: 'italic'
   }
 }
 
