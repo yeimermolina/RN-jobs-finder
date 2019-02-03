@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Platform, ScrollView, Linking } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { MapView } from 'expo';
 
 class ReviewScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -23,21 +24,35 @@ class ReviewScreen extends Component {
 
   renderLikedJobs() {
     console.log('LIKED', this.props.likedJobs)
-    return this.props.likedJobs.map((job) => (
-      <Card>
-        <View style={{ height: 300 }}>
-          <View style={styles.detailWrapper}>
-            <Text style={styles.italics}>{job.company}</Text>
-            <Text style={styles.italics}>{job.formattedRelativeTime}</Text>
+    return this.props.likedJobs.map((job) => {
+      const initialRegion = {
+        longitude: job.longitude,
+        latitude: job.latitude,
+        latitudeDelta: 0.045,
+        longitudeDelta: 0.02 
+      }
+      return (
+        <Card>
+          <View style={{ height: 300 }}>
+            <MapView 
+              style={{ flex: 1 }}
+              scrollEnabled={false}
+              cacheEnabled={Platform.OS === 'android'}
+              initialRegion={initialRegion}
+            />
+            <View style={styles.detailWrapper}>
+              <Text style={styles.italics}>{job.company}</Text>
+              <Text style={styles.italics}>{job.formattedRelativeTime}</Text>
+            </View>
+            <Button 
+              title="Apply Now"
+              backgroundColor="#03A9F4"
+              onPress={() => Linking.openURL(job.url)}
+            />
           </View>
-          <Button 
-            title="Apply Now"
-            backgroundColor="#03A9F4"
-            onPress={() => Linking.openURL(job.url)}
-          />
-        </View>
-      </Card>
-    ));
+        </Card>
+      )
+    });
   }
 
   render() {
