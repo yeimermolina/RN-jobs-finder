@@ -31,6 +31,7 @@ const MainNavigator = createBottomTabNavigator({
         }) 
       }
     },{
+      tabBarPosition: 'bottom',
       tabBarOptions: {
         labelStyle: {fontSize: 12}
       }
