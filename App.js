@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { createBottomTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { Provider } from 'react-redux';
 import AuthScreen from './screens/AuthScreen';
@@ -17,13 +18,24 @@ const MainNavigator = createBottomTabNavigator({
     screen: createBottomTabNavigator({
       map: { screen: MapScreen },
       deck: { screen: DeckScreen },
-      review: { 
+      review: {
+        navigationOptions: {
+          title: 'Review Jobs',
+          tabBarIcon: ({tintColor}) => {
+            return (<Icon name="favorite" size={30} color={tintColor} />);
+            }
+        },
         screen: createStackNavigator({
           review: { screen: ReviewScreen },
           settings: { screen: SettingsScreen }
         }) 
       }
-    }),
+    },{
+      tabBarOptions: {
+        labelStyle: {fontSize: 12}
+      }
+    } 
+    ),
     navigationOptions: {
       tabBarVisible: false
     }

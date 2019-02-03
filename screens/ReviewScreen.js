@@ -18,7 +18,7 @@ class ReviewScreen extends Component {
       />
     ),
     headerStyle: {
-      marginTop: Platform.OS === 'android' ? 24 : 0
+      marginTop: Platform.OS === 'android' ? 10 : 0
     }
   });
 

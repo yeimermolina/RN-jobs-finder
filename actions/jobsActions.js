@@ -33,7 +33,7 @@ export const fetchJobs = (region, callback) => async dispatch => {
     //TODO USE ANOTHER API JOB SEARCH
     let { data } = await axios.get(url);
     console.log('DATA', zip);
-    dispatch({ type: FETCH_JOBS, payload: JOB_DATA });
+    dispatch({ type: FETCH_JOBS, payload: {...JOB_DATA} });
     callback();
   } catch(e) {
     console.error(e);
