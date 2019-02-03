@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Platform, ScrollView } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text, Platform, ScrollView, Linking } from 'react-native';
+import { Button, Card } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { Card } from 'react-native-elements';
 
 class ReviewScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -31,6 +30,11 @@ class ReviewScreen extends Component {
             <Text style={styles.italics}>{job.company}</Text>
             <Text style={styles.italics}>{job.formattedRelativeTime}</Text>
           </View>
+          <Button 
+            title="Apply Now"
+            backgroundColor="#03A9F4"
+            onPress={() => Linking.openURL(job.url)}
+          />
         </View>
       </Card>
     ));
