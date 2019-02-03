@@ -15,7 +15,8 @@ const SWIPE_OUT_DURATION = 250
 class Swipe extends Component {
   static defaultProps = {
     onSwipeRight: () => {},
-    onSwipeLeft: () => {}
+    onSwipeLeft: () => {},
+    keyProp: 'id'
   }
 
   constructor(props) {
@@ -101,7 +102,7 @@ class Swipe extends Component {
       if(i === this.state.index) {
         return (
           <Animated.View
-            key={item.jobkey}
+            key={item[this.props.keyProp]}
             style={[this.getCardStyle(), styles.cardStyle, { zIndex: 1 }]}
             {...this.state.panResponder.panHandlers}
           >
@@ -112,7 +113,7 @@ class Swipe extends Component {
 
       return (
         <Animated.View
-          key={item.id}
+          key={item[this.props.keyProp]}
           style={[styles.cardStyle, { top: 10 * (i - this.state.index) }]}
         >
           {this.props.renderCard(item)}
